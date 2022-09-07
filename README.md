@@ -1,6 +1,6 @@
 ## OpenAI Data Classification
 
-I spun this up quickly as an example to see how well the (openai)[https://beta.openai.com] davinci engine could be used to classify and identify different levels of PII data.
+I spun this up quickly as an example to see how well the [openai](https://beta.openai.com) davinci engine could be used to classify and identify different levels of PII data.
 
 The use case here is multi-faceted: if I am scanning a file for PII I'd like more than just a boolean view of whether it contains PII or not, it's more useful to see what type of PII and the level of combined PII risk associated with the contents / payload / response. Different classification levels can have different treatments so being able to sample and detect and then apply a treatment or control becomes useful.
 
