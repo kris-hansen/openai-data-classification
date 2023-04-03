@@ -19,12 +19,21 @@ training = [["First Name", "Medium"], ["Last Name", "Medium"], ["IP Address", "M
 # take in a query via command line
 query = input("Enter a query: ")
 
-predict = openai.Classification.create(
-    search_model="davinci",
-    model="davinci",
-    examples = training,
-    query = query,
-    labels = ["High", "Medium", "Secret", "None"],
-).label.lower()
+# Convert training data to text format for the generative model
+training_text = "\n".join([f"{example[0]}: {example[1]}" for example in training])
 
-print("The classification is: " + predict)
+# Create a prompt for the generative model
+prompt = f"Given the following training data:\n{training_text}\n\nDetermine the data risk classification level of the query: '{query}'\n"
+
+completion = openai.Completion.create(
+    engine="davinci",
+    prompt=prompt,
+    max_tokens=10,
+    n=1,
+    stop=None,
+    temperature=0.5,
+)
+
+prediction = completion.choices[0].text.strip().lower()
+
+print("The classification is: " + prediction)
